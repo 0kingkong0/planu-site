@@ -627,6 +627,87 @@
         }
 
         /* ═══════════════════════════════════════════
+           DARK SECTION DITHER GRADE
+           ═══════════════════════════════════════════ */
+        @keyframes ditherFlow {
+            0% { background-position: 0 0, 0 0, 0 0, 0 0; }
+            50% { background-position: -28px 18px, 34px -22px, -20px -34px, 40px 22px; }
+            100% { background-position: -56px 36px, 68px -44px, -40px -68px, 80px 44px; }
+        }
+        .dark-dither-surface {
+            position: relative;
+            isolation: isolate;
+        }
+        .dark-dither-surface > * {
+            position: relative;
+            z-index: 1;
+        }
+        .dark-dither-surface::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.34;
+            background-image:
+                radial-gradient(circle at 20% 15%, rgba(236,140,104,0.34) 0%, transparent 42%),
+                radial-gradient(circle at 82% 78%, rgba(102,117,165,0.22) 0%, transparent 38%),
+                repeating-radial-gradient(
+                    circle at 0 0,
+                    rgba(236,140,104,0.22) 0 1px,
+                    transparent 1px 4px
+                ),
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(251,239,228,0.06) 0 1px,
+                    transparent 1px 3px
+                );
+            mix-blend-mode: soft-light;
+            animation: ditherFlow 16s linear infinite;
+        }
+        .dark-dither-surface::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: linear-gradient(140deg, rgba(236,140,104,0.12) 0%, transparent 50%, rgba(102,117,165,0.12) 100%);
+        }
+        .dark-dither-surface:hover::before {
+            opacity: 0.4;
+            animation-duration: 12s;
+        }
+        .dither-strong {
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(236,140,104,0.2) 0%, transparent 38%),
+                radial-gradient(circle at 80% 75%, rgba(236,140,104,0.14) 0%, transparent 36%),
+                repeating-radial-gradient(
+                    circle at center,
+                    rgba(236,140,104,0.2) 0 1px,
+                    transparent 1px 4px
+                ),
+                linear-gradient(180deg, rgba(20,10,6,0.2) 0%, rgba(0,0,0,0.18) 100%);
+            background-size: 100% 100%, 100% 100%, 8px 8px, 100% 100%;
+            background-blend-mode: screen, screen, soft-light, normal;
+            animation: ditherFlow 14s linear infinite;
+        }
+        .dither-strong::before {
+            opacity: 0.52;
+        }
+        .dither-strong::after {
+            background: linear-gradient(140deg, rgba(236,140,104,0.16) 0%, transparent 50%, rgba(236,140,104,0.12) 100%);
+        }
+        .how-step.pdf-highlight {
+            border: 1px solid rgba(236,140,104,0.22);
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(251,239,228,0.03) 0%, rgba(251,239,228,0.02) 100%);
+        }
+        .how-step.pdf-highlight .step-icon {
+            background: rgba(236,140,104,0.18);
+            box-shadow: 0 10px 24px rgba(236,140,104,0.15);
+        }
+
+        /* ═══════════════════════════════════════════
            SECTION: HOW IT WORKS
            ═══════════════════════════════════════════ */
         .how-section {
@@ -1076,6 +1157,195 @@
         }
 
         /* ═══════════════════════════════════════════
+           SECTION: SEMESTER VISUAL
+           ═══════════════════════════════════════════ */
+        .semester-visual-section {
+            padding: var(--section-pad) 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 100%);
+        }
+        .semester-visual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            align-items: center;
+        }
+        .semester-visual-copy .section-heading,
+        .semester-visual-copy .section-sub {
+            margin-left: 0;
+            text-align: left;
+        }
+        .visual-points {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .visual-point {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: fit-content;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(28,16,8,0.08);
+            color: var(--ink-muted);
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .visual-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--coral);
+        }
+        .semester-glass {
+            background: rgba(251, 239, 228, 0.62);
+            border: 1px solid rgba(28,16,8,0.08);
+            border-radius: 26px;
+            padding: 24px;
+            box-shadow: 0 20px 50px rgba(28,16,8,0.1);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        .semester-glass-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+        .semester-pill {
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--ink-light);
+        }
+        .semester-chips {
+            display: flex;
+            gap: 8px;
+        }
+        .semester-chip {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+        .semester-chip.red { background: #f16b6b; }
+        .semester-chip.gold { background: #ebb35b; }
+        .semester-chip.green { background: #55ba87; }
+        .mini-calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .mini-day {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            border: 1px solid rgba(28,16,8,0.08);
+            background: rgba(255,255,255,0.72);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--ink-muted);
+            position: relative;
+        }
+        .mini-day.hot {
+            background: rgba(236,140,104,0.25);
+            border-color: rgba(236,140,104,0.35);
+            color: var(--ink);
+        }
+        .mini-day.exam::after {
+            content: '';
+            position: absolute;
+            bottom: 7px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--indigo);
+        }
+        .semester-task {
+            background: rgba(255,255,255,0.84);
+            border: 1px solid rgba(28,16,8,0.08);
+            border-left: 4px solid var(--coral);
+            border-radius: 14px;
+            padding: 12px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .semester-task:last-child { margin-bottom: 0; }
+        .semester-task-title {
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: var(--ink);
+        }
+        .semester-task-meta {
+            font-size: 0.72rem;
+            color: var(--ink-light);
+        }
+        .semester-task-weight {
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--coral-deep);
+            white-space: nowrap;
+        }
+
+        /* ═══════════════════════════════════════════
+           SECTION: COMPETITIVE EDGE TABLE
+           ═══════════════════════════════════════════ */
+        .edge-section {
+            padding: var(--section-pad) 0;
+        }
+        .edge-table-wrap {
+            background: var(--white);
+            border: 1px solid rgba(28,16,8,0.08);
+            border-radius: 20px;
+            overflow: auto;
+            box-shadow: 0 12px 30px rgba(28,16,8,0.06);
+        }
+        .edge-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 640px;
+        }
+        .edge-table th {
+            text-align: left;
+            padding: 18px 20px;
+            font-size: 0.76rem;
+            color: var(--ink-light);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(28,16,8,0.08);
+            background: rgba(251,239,228,0.8);
+        }
+        .edge-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(28,16,8,0.06);
+            font-size: 0.88rem;
+            color: var(--ink-muted);
+            line-height: 1.55;
+        }
+        .edge-table tr:last-child td { border-bottom: 0; }
+        .edge-table td:first-child {
+            font-weight: 700;
+            color: var(--ink);
+            white-space: nowrap;
+        }
+        .edge-answer {
+            color: var(--coral-deep);
+            font-weight: 700;
+        }
+
+        /* ═══════════════════════════════════════════
            SECTION: TRUST / PRIVACY
            ═══════════════════════════════════════════ */
         .trust-section {
@@ -1285,6 +1555,14 @@
             .hero-stats { justify-content: center; }
             .hero-visual { max-width: 500px; margin: 0 auto; }
             .float-notif { left: 0; }
+            .semester-visual-grid { grid-template-columns: 1fr; }
+            .semester-visual-copy .section-heading,
+            .semester-visual-copy .section-sub {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+            .visual-points { justify-items: center; }
         }
 
         @media (max-width: 768px) {
@@ -1299,6 +1577,8 @@
             .email-form button { width: 100%; }
             footer .container { flex-direction: column; gap: 16px; text-align: center; }
             .footer-right { flex-direction: column; gap: 12px; }
+            .mini-calendar { gap: 6px; }
+            .mini-day { border-radius: 10px; font-size: 0.7rem; }
         }
 
         @media (max-width: 480px) {
@@ -1317,6 +1597,7 @@
                 <li><a href="#problem">The Problem</a></li>
                 <li><a href="#how">How It Works</a></li>
                 <li><a href="#features">Features</a></li>
+                <li><a href="#semester-visual">Visual</a></li>
                 <li><a href="#highschool">High School</a></li>
                 <li><a href="#signup" class="nav-cta">Contact Us</a></li>
             </ul>
@@ -1439,10 +1720,10 @@
         <div class="container">
             <div class="section-label reveal">The Problem</div>
             <h2 class="section-heading reveal reveal-delay-1">
-                Students don't have an organization problem.<br>They have an <em>input</em> problem.
+                The problem isn't laziness or lack of effort.<br>It's a semester full of scattered, <em>overwhelming</em> information.
             </h2>
             <p class="section-sub reveal reveal-delay-2">
-                Every tool asks you to do the work. PlanU does it for you.
+                Students are expected to turn syllabi, portals, PDFs, and announcements into one clear plan. PlanU does that work for them.
             </p>
 
             <div class="pain-grid">
@@ -1479,7 +1760,7 @@
             </div>
 
             <div class="how-steps">
-                <div class="how-step reveal reveal-delay-1">
+                <div class="how-step pdf-highlight reveal reveal-delay-1">
                     <div class="step-number">01</div>
                     <div class="step-icon">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="#EC8C68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1593,8 +1874,120 @@
         </div>
     </section>
 
+    <!-- ═══════ SEMESTER VISUAL PREVIEW ═══════ -->
+    <section class="semester-visual-section" id="semester-visual">
+        <div class="container">
+            <div class="semester-visual-grid">
+                <div class="semester-visual-copy">
+                    <div class="section-label reveal">Semester Visual</div>
+                    <h2 class="section-heading reveal reveal-delay-1">
+                        Your full semester,<br>seen in <em>one glance.</em>
+                    </h2>
+                    <p class="section-sub reveal reveal-delay-2">
+                        This is the modern student command center: deadlines, weighted tasks, and pressure weeks all surfaced before the panic starts.
+                    </p>
+                    <div class="visual-points reveal reveal-delay-3">
+                        <div class="visual-point"><span class="visual-dot"></span> deadline clusters flagged early</div>
+                        <div class="visual-point"><span class="visual-dot"></span> exam and assignment density mapped</div>
+                        <div class="visual-point"><span class="visual-dot"></span> quick edit timeline for every course</div>
+                    </div>
+                </div>
+
+                <div class="semester-glass reveal reveal-delay-2">
+                    <div class="semester-glass-top">
+                        <span class="semester-pill">September workload</span>
+                        <div class="semester-chips">
+                            <span class="semester-chip red"></span>
+                            <span class="semester-chip gold"></span>
+                            <span class="semester-chip green"></span>
+                        </div>
+                    </div>
+
+                    <div class="mini-calendar">
+                        <div class="mini-day">12</div>
+                        <div class="mini-day hot">13</div>
+                        <div class="mini-day exam">14</div>
+                        <div class="mini-day">15</div>
+                        <div class="mini-day">16</div>
+                        <div class="mini-day hot">17</div>
+                        <div class="mini-day">18</div>
+                    </div>
+
+                    <div class="semester-task">
+                        <div>
+                            <div class="semester-task-title">Midterm Essay Due</div>
+                            <div class="semester-task-meta">History 101 • Friday 11:59 PM</div>
+                        </div>
+                        <div class="semester-task-weight">25%</div>
+                    </div>
+                    <div class="semester-task">
+                        <div>
+                            <div class="semester-task-title">Stats Quiz 4</div>
+                            <div class="semester-task-meta">Math 212 • Monday 9:00 AM</div>
+                        </div>
+                        <div class="semester-task-weight">15%</div>
+                    </div>
+                    <div class="semester-task">
+                        <div>
+                            <div class="semester-task-title">Lab Prep Checklist</div>
+                            <div class="semester-task-meta">Bio 202 • Wednesday 6:00 PM</div>
+                        </div>
+                        <div class="semester-task-weight">Low risk</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ COMPETITIVE EDGE ═══════ -->
+    <section class="edge-section" id="edge">
+        <div class="container">
+            <div class="section-label reveal" style="text-align:center;">Why PlanU</div>
+            <h2 class="section-heading reveal reveal-delay-1" style="margin-left:auto;margin-right:auto;">
+                Built for outcomes, not <em>busywork.</em>
+            </h2>
+            <p class="section-sub reveal reveal-delay-2" style="margin-left:auto;margin-right:auto;">
+                Students do not need another productivity toy. They need a planner that starts from the syllabus and actually removes stress.
+            </p>
+
+            <div class="edge-table-wrap reveal reveal-delay-3">
+                <table class="edge-table">
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            <th>The Problem</th>
+                            <th>PlanU's Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Google Calendar</td>
+                            <td>Great for events, but empty at semester start and still manual.</td>
+                            <td class="edge-answer">Auto-populates deadlines directly from syllabus text.</td>
+                        </tr>
+                        <tr>
+                            <td>Notion Templates</td>
+                            <td>Powerful but setup-heavy; students quit before week two.</td>
+                            <td class="edge-answer">Zero-setup timeline live in under 60 seconds.</td>
+                        </tr>
+                        <tr>
+                            <td>Generic AI Chat</td>
+                            <td>Can miss context, weighting, and relative date logic.</td>
+                            <td class="edge-answer">Purpose-built academic parser for structured output.</td>
+                        </tr>
+                        <tr>
+                            <td>Paper Planners</td>
+                            <td>No sync, no reminders, no workload forecasting.</td>
+                            <td class="edge-answer">Smart nudges, calendar sync, and heatmap by week.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
     <!-- ═══════ HIGH SCHOOL: AI STUDY COACH ═══════ -->
-    <section class="hs-section" id="highschool">
+    <section class="hs-section dark-dither-surface dither-strong" id="highschool">
         <div class="container">
             <div class="hs-top">
                 <div class="hs-top-content">
@@ -1774,7 +2167,7 @@
     <!-- ═══════ CTA / EMAIL CAPTURE ═══════ -->
     <section class="cta-section" id="signup">
         <div class="container">
-            <div class="cta-card reveal">
+            <div class="cta-card dark-dither-surface dither-strong reveal">
                 <div class="cta-content">
                     <div class="hero-badge" style="margin-bottom:24px;background:rgba(236,140,104,0.15);border-color:rgba(236,140,104,0.3);">
                         Launching at University of Windsor
