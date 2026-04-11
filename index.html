@@ -81,6 +81,38 @@
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
  <style>
+ <!-- ═══════════════════════════════════════════
+     NAV — GLASSMORPHISM
+     ═══════════════════════════════════════════ -->
+<nav id="main-nav">
+  <div class="container">
+    <a href="#" class="nav-logo">
+      <img src="/favicon.png" alt="" />
+      Plan<span>U</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#problem"    data-scroll>The Problem</a></li>
+      <li><a href="#how"        data-scroll>How It Works</a></li>
+      <li><a href="#features"   data-scroll>Features</a></li>
+      <li><a href="#highschool" data-scroll>High School</a></li>
+      <li><a href="#signup" data-scroll class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#problem"    data-scroll>The Problem</a>
+    <a href="#how"        data-scroll>How It Works</a>
+    <a href="#features"   data-scroll>Features</a>
+    <a href="#highschool" data-scroll>High School</a>
+    <a href="#signup" data-scroll class="nav-cta-mobile">Contact Us</a>
+  </div>
+</nav>
+
+<style>
   /* ═══════════════════════════════════════════
      NAV — GLASSMORPHISM (UPDATED)
      ═══════════════════════════════════════════ */
@@ -263,6 +295,7 @@
       });
     });
   })();
+
 
     
         /* ═══════════════════════════════════════════
