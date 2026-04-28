@@ -201,9 +201,9 @@
             gap: 16px;
         }
         .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0;
             font-family: var(--sans);
             font-weight: 900;
             font-size: 1.3rem;
@@ -2290,15 +2290,16 @@
 
                 <div class="coach-mock">
                     <div class="coach-mock-label">AI Study Coach · Preview</div>
-                    <div class="msg-dark user">I have a biology midterm on Friday. Chapters 4–7. I don't know where to start.</div>
-                    <div class="msg-dark">Here's your plan for this week. Biology midterms are <strong>recall-heavy</strong> — rereading won't work. Instead:</div>
-                    <div class="msg-dark"><strong>Today:</strong> Take a blank sheet and write everything you remember from Ch. 4–5. Check what you missed. That's active recall.</div>
-                    <div class="msg-dark"><strong>Wednesday:</strong> Do the same for Ch. 6–7. Then review your gaps from Monday.</div>
-                    <div class="msg-dark"><strong>Thursday:</strong> Take the practice quiz on all 4 chapters. Focus only on what you got wrong.</div>
+                    <div class="msg-dark user">I have a biology midterm Friday. Chapters 4–7. I don't know where to start.</div>
+                    <div class="msg-dark">Before we touch a plan — quick check. Is the test multiple choice, short answer, or both? Different formats, completely different study moves.</div>
+                    <div class="msg-dark user">Both. Mostly short answer.</div>
+                    <div class="msg-dark">Then I have to be honest with you: <strong>rereading the chapter is the worst thing you can do.</strong> Short answer tests <em>production</em> — pulling concepts out of your head. Rereading builds recognition, which feels like learning but isn't.</div>
+                    <div class="msg-dark">Try this instead, right now, 20 minutes: close the book. On a blank page, sketch the cellular respiration cycle from Ch 5 from memory — every arrow, every step. Wherever you stall, <em>that's</em> the real gap. Open the book only to fill it in. This is called <strong>retrieval practice</strong>, and it predicts test scores better than any other study method we've measured.</div>
+                    <div class="msg-dark">Do that for one chapter today. Tomorrow we layer spaced repetition on top so it sticks. Sound good?</div>
                     <div class="chip-row dark">
-                        <span class="chip">✓ Active Recall</span>
-                        <span class="chip">✓ Spaced Repetition</span>
-                        <span class="chip">✓ Practice Testing</span>
+                        <span class="chip">Start 20-min Lock-In</span>
+                        <span class="chip">Why this works</span>
+                        <span class="chip">Different chapter</span>
                     </div>
                 </div>
             </div>
@@ -2559,7 +2560,8 @@
                 </div>
                 <h2>Start your semester <span class="accent">organized</span> — for once.</h2>
                 <p>Join the waitlist. Get first access when we open Fall '26 enrollment. No spam — one short email when it's your turn.</p>
-                <form class="email-form" id="waitlist-form" novalidate>
+                <iframe name="formsubmit-target" id="formsubmit-target" style="display:none" tabindex="-1" aria-hidden="true"></iframe>
+                <form class="email-form" id="waitlist-form" action="https://formsubmit.co/el/caxogi" method="POST" target="formsubmit-target">
                     <input type="text" name="name" class="name-input" placeholder="Your name" required autocomplete="name">
                     <div class="email-row">
                         <input type="email" name="email" placeholder="you@university.edu" required autocomplete="email">
@@ -2612,34 +2614,30 @@
             io.observe(el);
         });
 
-        // Waitlist form — Formsubmit AJAX
+        // Waitlist form — hidden iframe submit (no CORS, no AJAX)
         const waitlistForm = document.getElementById('waitlist-form');
-        if (waitlistForm) {
-            waitlistForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                if (waitlistForm._honey && waitlistForm._honey.value) return;
-
+        const hiddenFrame = document.getElementById('formsubmit-target');
+        let waitlistSubmitted = false;
+        if (waitlistForm && hiddenFrame) {
+            waitlistForm.addEventListener('submit', (e) => {
+                if (waitlistForm._honey && waitlistForm._honey.value) {
+                    e.preventDefault();
+                    return;
+                }
                 const btn = waitlistForm.querySelector('button[type="submit"]');
                 btn.disabled = true;
                 btn.textContent = 'Sending…';
-
-                try {
-                    const res = await fetch('https://formsubmit.co/ajax/el/caxogi', {
-                        method: 'POST',
-                        headers: { 'Accept': 'application/json' },
-                        body: new FormData(waitlistForm)
-                    });
-                    if (!res.ok) throw new Error('Submit failed');
-                    waitlistForm.outerHTML = `
-                        <div class="form-success">
-                            <div class="check">✓</div>
-                            <div class="title">You're on the list.</div>
-                            <div class="sub">We'll email you when Fall '26 opens.</div>
-                        </div>`;
-                } catch (err) {
-                    btn.textContent = 'Try again';
-                    btn.disabled = false;
-                }
+                waitlistSubmitted = true;
+            });
+            hiddenFrame.addEventListener('load', () => {
+                if (!waitlistSubmitted) return;
+                const wrap = document.createElement('div');
+                wrap.className = 'form-success';
+                wrap.innerHTML = `
+                    <div class="check">✓</div>
+                    <div class="title">You're on the list.</div>
+                    <div class="sub">We'll email you when Fall '26 opens.</div>`;
+                waitlistForm.replaceWith(wrap);
             });
         }
     </script>
