@@ -4,12 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlanU — Your Semester, Organized in 60 Seconds</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Favicons — absolute paths so Google can fetch from any crawled URL.
+         sizes="any" tells the SERP that this PNG is the canonical icon at
+         every render size; Google downscales the 500×500 brand mark to 48px
+         for the search-results slot. -->
+    <link rel="icon" type="image/png" sizes="any" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="canonical" href="https://planu.ca/">
+
     <meta name="description" content="Upload your syllabus. Get your entire semester organized in under 60 seconds. PlanU is the AI-powered academic engine built for students.">
+
+    <!-- Open Graph + Twitter: image used by social previews AND sometimes
+         shown by Google as the SERP thumbnail when the favicon API is slow
+         to refresh. Pointed at the 500×500 logo for now — replace with a
+         wider 1200×630 banner later if you want richer share cards. -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://planu.ca/">
+    <meta property="og:title" content="PlanU — Your Semester, Organized in 60 Seconds">
+    <meta property="og:description" content="Upload your syllabus. Get your entire semester organized in under 60 seconds. PlanU is the AI-powered academic engine built for students.">
+    <meta property="og:image" content="https://planu.ca/favicon.png">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="500">
+    <meta property="og:site_name" content="PlanU">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="PlanU — Your Semester, Organized in 60 Seconds">
+    <meta name="twitter:description" content="Upload your syllabus. Get your entire semester organized in under 60 seconds.">
+    <meta name="twitter:image" content="https://planu.ca/favicon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" href="favicon.png">
     <style>
         /* ═══════════════════════════════════════════
            RESET & VARIABLES — receipt aesthetic
